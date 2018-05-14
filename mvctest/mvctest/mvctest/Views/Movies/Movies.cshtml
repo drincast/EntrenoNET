@@ -1,0 +1,22 @@
+﻿@model mvctest.ViewModels.MovieViewModel
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+
+@if (Model.customers.Count > 0)
+{
+    <text>Nada</text>
+}
+else
+{
+    <ul>
+        @foreach (var customer in Model.customers)
+        {
+            <li>@customer.name</li>
+        }
+    </ul>
+}
+

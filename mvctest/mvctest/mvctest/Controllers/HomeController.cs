@@ -38,14 +38,14 @@ namespace mvctest.Controllers
 
         public ActionResult Index()
         {
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View(this.viewModel);
+            return View();
         }
 
         public ActionResult Contact()

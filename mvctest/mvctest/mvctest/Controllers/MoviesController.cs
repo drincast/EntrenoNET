@@ -10,6 +10,22 @@ namespace mvctest.Controllers
 {
     public class MoviesController : Controller
     {
+        public ActionResult Index()
+        {
+            var movies = GetMovies();
+
+            return View(movies);
+        }
+
+        private IEnumerable<Movie> GetMovies()
+        {
+            return new List<Movie>()
+            {
+                new Movie { id = 1, name = "Shrek" },
+                new Movie { id = 2, name = "Wall-e" }
+            };
+        }
+
         // GET: Movies
         public ActionResult Random()
         {
@@ -45,7 +61,7 @@ namespace mvctest.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Index(int? pageIndex, string sortBy)
+        public ActionResult Index2(int? pageIndex, string sortBy)
         {
             if (pageIndex.HasValue)
                 pageIndex = 1;
@@ -73,5 +89,7 @@ namespace mvctest.Controllers
 
             return Content(year + "/" + month);
         }
+
+        
     }
 }
