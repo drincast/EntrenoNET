@@ -10,17 +10,32 @@ namespace mvctest.Controllers
 {
     public class CustomersController : Controller
     {
-        // GET: Customers
+        private ApplicationDbContext _context;
+
+        public CustomersController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+            base.Dispose(disposing);    
+        }
+
+        // GET: Customers        
         public ActionResult Index()
         {
-            var customers = GetCustomers();
+            //var customers = GetCustomers();
+            var customers = this._context.Customers.ToList();
 
             return View(customers);
         }
 
         public ActionResult Details(int id)
         {
-            var customer = GetCustomers().SingleOrDefault(c => c.id == id);
+            //var customer = GetCustomers().SingleOrDefault(c => c.id == id);
+            var customer = this._context.Customers.SingleOrDefault(c => c.id == id);
 
             if (customer == null)
                 return null;
