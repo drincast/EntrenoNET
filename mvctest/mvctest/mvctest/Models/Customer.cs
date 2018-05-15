@@ -9,5 +9,8 @@ namespace mvctest.Models
     {
         public int id { get; set; }
         public string name { get; set; }
+        public bool isSubcribedToNewsletter { get; set; }
+        public MembershipType membershipType { get; set; }
+        public byte membershipTypeId { get; set; }
     }
 }
