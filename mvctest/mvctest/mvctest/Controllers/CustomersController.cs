@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,7 +28,7 @@ namespace mvctest.Controllers
         public ActionResult Index()
         {
             //var customers = GetCustomers();
-            var customers = this._context.Customers.ToList();
+            var customers = this._context.Customers.Include(c => c.membershipType).ToList();
 
             return View(customers);
         }
