@@ -7,7 +7,9 @@
 <h2>Customers</h2>
 
 <button id="btnCargar" class="btn-link">Cargar</button>
-
+<br /><br />
+<select id="cboMembershipTypes" class="form-control"></select>
+<br />
 
 <table id="customers" class="table table-bordered table-hover">
     <thead>
@@ -54,7 +56,27 @@
             //console.log(id, window.location.host, window.location.hostname, window.location.pathname, window.location.origin, window.location.href);
         }
 
+        function SeleccionarCbo(id) {
+            console.log("onclick de la opcion", id);
+        }
+
         $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost:51853/api/MembershipTypes",
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    data.forEach(function (item, index) {
+                        $("#cboMembershipTypes").append("<option value='" + item.id + "' onclick='SeleccionarCbo(" + item.id + ")'>" + item.name + "</option>");
+                    });
+                }
+            });
+
+            $("#cboMembershipTypes").on("change", function () {
+                //var x = document.getElementById("cboMembershipTypes").value;
+                var x = $("#cboMembershipTypes").val();
+                console.log("onchange", x);                
+            });
 
             $("#btnCargar").on("click", function () {
                 $.ajax({

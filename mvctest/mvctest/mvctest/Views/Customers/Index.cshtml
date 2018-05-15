@@ -6,6 +6,11 @@
 
 <h2>Customers</h2>
 
+@Html.DropDownList("cboCustomer", new SelectList(Model, "id", "name"), new { @class = "form-control"})
+
+<br />
+<br />
+
 @if (!Model.Any())
 {
     <p> We don't have any customers yet.</p>
