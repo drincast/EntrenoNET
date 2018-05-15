@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+<button id="btnCargar" class="btn-link">Cargar</button>
+
+
+<table id="customers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Membership Type</th>
+            <th>Discount Rate</th>
+        </tr>
+    </thead>
+    <tbody>
+                
+    </tbody>
+</table>
+
+@*@foreach (var customer in Model)
+{
+    <tr>
+        <td>@Html.ActionLink(customer.name, "Details", "Customers", new { id = customer.id }, null)</td>
+        <td>@customer.membershipType.name</td>
+        <td>@customer.membershipType.DiscountRate%</td>
+    </tr>
+}*@
+
+
+@*'@Html.ActionLink("dis", "Details", "Customers", new { id = item.name }, null)'*@
+
+@section scripts
+{
+    <script>
+        //$("#customers").find("tbody").add("tr");
+        //$("#customers").find("tbody").append("<tr><td>"+item.name+"</td></tr>");
+
+        //var tr = $("#customers3").find("tbody").append("<tr></tr>");
+        //tr.append("<td>" + item.name + "</td>");
+        //tr.append("<td>" + item.membershipType.name + "</td>");
+        //tr.append("<td>" + item.membershipType.DiscountRate + "%</td>");
+
+
+        function DetalleCustomer(id) {
+            var url = "http://" + window.location.host + "/Customers/Details/" + id;
+            console.log(url);
+            window.location = url;
+
+            //console.log(id, window.location.host, window.location.hostname, window.location.pathname, window.location.origin, window.location.href);
+        }
+
+        $(document).ready(function () {
+
+            $("#btnCargar").on("click", function () {
+                $.ajax({
+                    url: "http://localhost:51853/api/Customers",
+                    method: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        data.forEach(function (item, index) {
+                            $("#customers").find("tbody").append("<tr>"
+                                + "<td onClick='DetalleCustomer(" + item.id + " )' class='btn btn-primary'>" + - + "</td>"
+                                + "<td>" + item.membershipType.name + "</td>"
+                                + "<td>" + item.membershipType.DiscountRate + "</td>"
+                                + "</tr>");
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
