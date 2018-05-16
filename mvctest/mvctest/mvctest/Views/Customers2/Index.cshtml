@@ -34,6 +34,18 @@
 }*@
 
 
+@using (Html.BeginForm("Create", "Customers"))
+{
+    <div class="from-group">
+        @Html.Label("nombre")
+        @Html.TextBox("txtNombre", "", new { id = "txtNombre"})
+    </div>    
+}
+<div>
+    <button id="btnCrear" class="btn-default">Crear</button>
+</div>
+
+
 @*'@Html.ActionLink("dis", "Details", "Customers", new { id = item.name }, null)'*@
 
 @section scripts
@@ -94,6 +106,22 @@
                     }
                 });
             });
+
+
+            $("#btnCrear").on("click", function () {
+                $.ajax({
+                    url: "http://localhost:51853/api/MembershipTypes",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; utf-8",
+                    data: "{'id':0,'signUpFee':0,'durationInMonths':0,'DiscountRate':0,'name':'un nuevo nombre'}",
+
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+
         });
     </script>
 }

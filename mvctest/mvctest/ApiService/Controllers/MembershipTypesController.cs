@@ -26,8 +26,14 @@ namespace ApiService.Controllers
         }
 
         // POST: api/MembershipTypes
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public IHttpActionResult Post(MembershipType in_membershipType)
         {
+            var members = CrearMembershipTypes();
+            in_membershipType.id = (byte)members.Count;
+            members.Add(in_membershipType);
+
+            return Created(new Uri(Request.RequestUri + "/" + in_membershipType.id), in_membershipType);
         }
 
         // PUT: api/MembershipTypes/5

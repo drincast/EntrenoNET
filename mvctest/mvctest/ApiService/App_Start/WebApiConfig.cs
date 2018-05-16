@@ -6,6 +6,9 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
+using ApiService.App_Start;
+
+
 namespace ApiService
 {
     public static class WebApiConfig
@@ -25,6 +28,12 @@ namespace ApiService
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //habilita el acceso desde clientes AJAX, tener cuidado, mejorar para acceso restringido
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsMessageHandler());
+
+            // New code
+            //config.EnableCors();
         }
     }
 }
